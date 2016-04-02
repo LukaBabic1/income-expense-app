@@ -18,7 +18,7 @@ public final class ServiceModule {
 
     @Provides
     public TelephonyManager provideTelephonyManager() {
-        return (TelephonyManager)application.getSystemService(Context.TELEPHONY_SERVICE);
+        return (TelephonyManager) application.getSystemService(Context.TELEPHONY_SERVICE);
     }
 
     public interface Exposes {

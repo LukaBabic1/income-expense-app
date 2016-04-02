@@ -1,8 +1,12 @@
 package com.babic.expensetracker.injection.module;
 
+import android.content.Context;
+
 import com.babic.expensetracker.application.ExpenseTrackerApplication;
+import com.babic.expensetracker.injection.qualifiers.ForApplication;
 
 import dagger.Module;
+import dagger.Provides;
 
 @Module
 public final class ApplicationModule {
@@ -13,7 +17,15 @@ public final class ApplicationModule {
         this.application = application;
     }
 
+    @Provides
+    @ForApplication
+    public Context provideApplicationContext() {
+        return application;
+    }
+
     public interface Exposes {
 
+        @ForApplication
+        ExpenseTrackerApplication expenseTrackerApplication();
     }
 }

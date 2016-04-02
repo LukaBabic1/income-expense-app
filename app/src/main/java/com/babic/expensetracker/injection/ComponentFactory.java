@@ -3,6 +3,7 @@ package com.babic.expensetracker.injection;
 import com.babic.expensetracker.application.ExpenseTrackerApplication;
 import com.babic.expensetracker.injection.component.ApplicationComponent;
 import com.babic.expensetracker.injection.component.DaggerApplicationComponent;
+import com.babic.expensetracker.injection.module.ApplicationModule;
 import com.babic.expensetracker.injection.module.ServiceModule;
 
 public final class ComponentFactory {
@@ -12,6 +13,9 @@ public final class ComponentFactory {
     }
 
     public static ApplicationComponent createApplicationComponent(final ExpenseTrackerApplication application) {
-        return DaggerApplicationComponent.builder().serviceModule(new ServiceModule(application)).build();
+        return DaggerApplicationComponent.builder()
+                                         .serviceModule(new ServiceModule(application))
+                                         .applicationModule(new ApplicationModule(application))
+                                         .build();
     }
 }
