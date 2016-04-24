@@ -3,7 +3,7 @@ package com.babic.expensetracker.injection.module;
 import android.content.Context;
 
 import com.babic.expensetracker.application.ExpenseTrackerApplication;
-import com.babic.expensetracker.injection.qualifiers.ForApplication;
+import com.babic.expensetracker.injection.qualifier.ForApplication;
 
 import dagger.Module;
 import dagger.Provides;

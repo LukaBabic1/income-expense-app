@@ -12,7 +12,7 @@ public final class ServiceModule {
 
     private final Application application;
 
-    public ServiceModule(Application application) {
+    public ServiceModule(final Application application) {
         this.application = application;
     }
 

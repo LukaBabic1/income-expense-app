@@ -5,7 +5,7 @@ import android.content.Context;
 import android.telephony.TelephonyManager;
 
 import com.babic.expensetracker.injection.ComponentFactory;
-import com.babic.expensetracker.injection.component.ApplicationComponent;
+import com.babic.expensetracker.injection.component.application.ApplicationComponent;
 
 import javax.inject.Inject;
 

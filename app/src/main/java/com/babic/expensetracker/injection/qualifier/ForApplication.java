@@ -1,4 +1,4 @@
-package com.babic.expensetracker.injection.qualifiers;
+package com.babic.expensetracker.injection.qualifier;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
