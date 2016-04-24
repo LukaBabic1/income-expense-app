@@ -18,6 +18,9 @@ public final class AppDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(final SQLiteDatabase db) {
         db.execSQL(DatabaseContract.ExpenseDataTable.SQL_CREATE_EXPENSE_DATA_TABLE);
+        db.execSQL(DatabaseContract.IncomeDataTable.SQL_CREATE_EXPENSE_DATA_TABLE);
+        db.execSQL(DatabaseContract.ExpenseTypeTable.SQL_CREATE_EXPSNSE_TYPE_TABLE);
+//        db.execSQL(DatabaseContract.IncomeTypeTable.SQL_CREATE_EXPSNSE_TYPE_TABLE);
     }
 
     @Override

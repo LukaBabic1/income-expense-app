@@ -2,6 +2,8 @@ package com.babic.expensetracker.business.data;
 
 public final class ExpenseType {
 
+    public static final int NO_ID = Integer.MIN_VALUE;
+
     public final int id;
     public final String name;
     public final int usageCount;
@@ -10,6 +12,14 @@ public final class ExpenseType {
         this.id = id;
         this.name = name;
         this.usageCount = usageCount;
+    }
+
+    public ExpenseType(String name, int usageCount) {
+        this(NO_ID, name, usageCount);
+    }
+
+    public ExpenseType copy(final int id) {
+        return new ExpenseType(id, name, usageCount);
     }
 
     @Override

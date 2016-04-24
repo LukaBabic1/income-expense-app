@@ -8,7 +8,9 @@ public interface ExpenseDao {
 
     void saveExpense(ExpenseData data);
 
-    ExpenseData getExpenseById(String id);
+    void updateExpense(ExpenseData data);
+
+    ExpenseData getExpenseById(int id);
 
     List<ExpenseData> getAllExpenses();
 

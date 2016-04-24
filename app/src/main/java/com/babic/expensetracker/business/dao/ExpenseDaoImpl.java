@@ -9,6 +9,7 @@ import com.babic.expensetracker.business.data.ExpenseData;
 import com.babic.expensetracker.util.CursorUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public final class ExpenseDaoImpl extends BaseDao implements ExpenseDao {
@@ -27,9 +28,25 @@ public final class ExpenseDaoImpl extends BaseDao implements ExpenseDao {
         });
     }
 
+    @Override
+    public void updateExpense(final ExpenseData data) {
+        writeToDatabase(databaseHelper, new ManagedAction() {
+            @Override
+            public void call(SQLiteDatabase sqLiteDatabase) {
+                sqLiteDatabase.update(ExpenseDataTable.TABLE_NAME,
+                                      expenseDataToContentValues(data),
+                                      ExpenseDataTable._ID + " = ?",
+                                      new String[]{String.valueOf(data.id)});
+            }
+        });
+    }
+
     private ContentValues expenseDataToContentValues(final ExpenseData data) {
         final ContentValues values = new ContentValues();
 
+        if (data.id != Integer.MIN_VALUE) {
+            values.put(ExpenseDataTable._ID, data.id);
+        }
         values.put(ExpenseDataTable.COLUMN_NAME, data.name);
         values.put(ExpenseDataTable.COLUMN_AMOUNT, data.amount);
         values.put(ExpenseDataTable.COLUMN_DESCRIPTION, data.description);
@@ -39,20 +56,37 @@ public final class ExpenseDaoImpl extends BaseDao implements ExpenseDao {
     }
 
     @Override
-    public ExpenseData getExpenseById(final String id) {
+    public ExpenseData getExpenseById(final int id) {
         return readFromDatabase(databaseHelper, new ManagedFunction<ExpenseData>() {
             @Override
             public ExpenseData call(final SQLiteDatabase database) {
-                return cursorToExpenseData(database.query(ExpenseDataTable.TABLE_NAME,
-                                                          ExpenseDataTable.ALL_COLUMNS,
-                                                          ExpenseDataTable._ID + " = ?",
-                                                          new String[]{id},
-                                                          null,
-                                                          null,
-                                                          null)
-                );
+                final Cursor cursor = database.query(ExpenseDataTable.TABLE_NAME,
+                                                     ExpenseDataTable.ALL_COLUMNS,
+                                                     ExpenseDataTable._ID + "= ?",
+                                                     new String[]{String.valueOf(id)},
+                                                     null,
+                                                     null,
+                                                     null);
+
+                if (cursor.moveToFirst()) {
+                    return cursorToExpenseData(cursor);
+                } else {
+                    return ExpenseData.EMPTY;
+                }
             }
         });
+    }
+
+    private List<ExpenseData> cursorToList(final Cursor cursor) {
+        if (cursor != null && cursor.moveToFirst()) {
+            final List<ExpenseData> data = new ArrayList<>(cursor.getCount());
+            do {
+                data.add(cursorToExpenseData(cursor));
+            } while (cursor.moveToNext());
+            return data;
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     private ExpenseData cursorToExpenseData(final Cursor cursor) {
@@ -78,17 +112,6 @@ public final class ExpenseDaoImpl extends BaseDao implements ExpenseDao {
                 );
             }
         });
-    }
-
-    private List<ExpenseData> cursorToList(final Cursor cursor) {
-        final List<ExpenseData> data = new ArrayList<>();
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                data.add(cursorToExpenseData(cursor));
-            } while (cursor.moveToNext());
-        }
-
-        return data;
     }
 
     @Override

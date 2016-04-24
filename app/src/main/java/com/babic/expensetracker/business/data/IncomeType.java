@@ -12,6 +12,10 @@ public final class IncomeType {
         this.usageCount = usageCount;
     }
 
+    public IncomeType copy(final int id) {
+        return new IncomeType(id, name, usageCount);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

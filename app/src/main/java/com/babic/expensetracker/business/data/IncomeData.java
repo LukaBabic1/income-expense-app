@@ -2,6 +2,8 @@ package com.babic.expensetracker.business.data;
 
 public final class IncomeData {
 
+    public static final int NO_ID = Integer.MIN_VALUE;
+
     public final int id;
     public final String name;
     public final String description;
@@ -14,6 +16,14 @@ public final class IncomeData {
         this.description = description;
         this.amount = amount;
         this.timestamp = timestamp;
+    }
+
+    public IncomeData(String name, String description, int amount, long timestamp) {
+        this(NO_ID, name, description, amount, timestamp);
+    }
+
+    public IncomeData copy(final int id) {
+        return new IncomeData(id, name, description, amount, timestamp);
     }
 
     @Override

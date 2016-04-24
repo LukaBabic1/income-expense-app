@@ -31,14 +31,14 @@ public abstract class BaseDao {
         this.databaseHelper = databaseHelper;
     }
 
-    protected <T> T writeToDatabase(final SQLiteOpenHelper dbHelper, final ManagedFunction<T> managedFunction) {
-        return writeToDatabase(dbHelper, false, managedFunction);
+    protected <T> T writeToDatabase(final SQLiteOpenHelper databaseHelper, final ManagedFunction<T> managedFunction) {
+        return writeToDatabase(databaseHelper, false, managedFunction);
     }
 
-    protected <T> T writeToDatabase(final SQLiteOpenHelper dbHelper, final boolean inTransaction, final ManagedFunction<T> managedFunction) {
+    protected <T> T writeToDatabase(final SQLiteOpenHelper databaseHelper, final boolean inTransaction, final ManagedFunction<T> managedFunction) {
         SQLiteDatabase database = null;
         try {
-            database = dbHelper.getWritableDatabase();
+            database = databaseHelper.getWritableDatabase();
             if (inTransaction) {
                 database.beginTransaction();
             }
@@ -65,14 +65,14 @@ public abstract class BaseDao {
         return null;
     }
 
-    protected void writeToDatabase(final SQLiteOpenHelper dbHelper, final ManagedAction managedAction) {
-        writeToDatabase(dbHelper, false, managedAction);
+    protected void writeToDatabase(final SQLiteOpenHelper databaseHelper, final ManagedAction managedAction) {
+        writeToDatabase(databaseHelper, false, managedAction);
     }
 
-    protected void writeToDatabase(final SQLiteOpenHelper dbHelper, final boolean inTransaction, final ManagedAction managedAction) {
+    protected void writeToDatabase(final SQLiteOpenHelper databaseHelper, final boolean inTransaction, final ManagedAction managedAction) {
         SQLiteDatabase database = null;
         try {
-            database = dbHelper.getWritableDatabase();
+            database = databaseHelper.getWritableDatabase();
             if (inTransaction) {
                 database.beginTransaction();
             }

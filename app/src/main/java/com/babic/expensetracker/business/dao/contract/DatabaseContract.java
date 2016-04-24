@@ -47,6 +47,7 @@ public final class DatabaseContract {
                         COLUMN_CREATED_AT + COLUMN_CREATED_AT_TYPE + ")";
 
         public static final String[] ALL_COLUMNS = new String[]{
+                _ID,
                 COLUMN_NAME,
                 COLUMN_AMOUNT,
                 COLUMN_DESCRIPTION,
@@ -79,10 +80,57 @@ public final class DatabaseContract {
                         COLUMN_CREATED_AT + COLUMN_CREATED_AT_TYPE + ")";
 
         public static final String[] ALL_COLUMNS = new String[]{
+                _ID,
                 COLUMN_NAME,
                 COLUMN_AMOUNT,
                 COLUMN_DESCRIPTION,
                 COLUMN_CREATED_AT
+        };
+    }
+
+    public static final class ExpenseTypeTable implements BaseColumns {
+
+        public static final String TABLE_NAME = "expense_type_table";
+
+        public static final String COLUMN_NAME = "name";
+        public static final String COLUMN_NAME_TYPE = TYPE_TEXT;
+
+        public static final String COLUMN_USAGE_COUNT = "usageCount";
+        public static final String COLUMN_USAGE_COUNT_TYPE = TYPE_NUMERIC;
+
+        public static final String SQL_CREATE_EXPSNSE_TYPE_TABLE =
+                CREATE_TABLE + TABLE_NAME + " (" +
+                        _ID + TYPE_PRIMARY_KEY_AUTOINCREMENT + SEPARATOR +
+                        COLUMN_NAME + COLUMN_NAME_TYPE + SEPARATOR +
+                        COLUMN_USAGE_COUNT + COLUMN_USAGE_COUNT_TYPE + ")";
+
+        public static final String[] ALL_COLUMNS = new String[]{
+                _ID,
+                COLUMN_NAME,
+                COLUMN_USAGE_COUNT
+        };
+    }
+
+    public static final class IncomeTypeTable implements BaseColumns {
+
+        public static final String TABLE_NAME = "income_type_table";
+
+        public static final String COLUMN_NAME = "name";
+        public static final String COLUMN_NAME_TYPE = TYPE_TEXT;
+
+        public static final String COLUMN_USAGE_COUNT = "usageCount";
+        public static final String COLUMN_USAGE_COUNT_TYPE = TYPE_NUMERIC;
+
+        public static final String SQL_CREATE_INCOME_TYPE_TABLE =
+                CREATE_TABLE + TABLE_NAME + " (" +
+                        _ID + TYPE_PRIMARY_KEY_AUTOINCREMENT + SEPARATOR +
+                        COLUMN_NAME + COLUMN_NAME_TYPE + SEPARATOR +
+                        COLUMN_USAGE_COUNT + COLUMN_USAGE_COUNT_TYPE + ")";
+
+        public static final String[] ALL_COLUMNS = new String[]{
+                _ID,
+                COLUMN_NAME,
+                COLUMN_USAGE_COUNT
         };
     }
 }
