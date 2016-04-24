@@ -15,5 +15,6 @@ import dagger.Component;
                 ActivityModule.class
         }
 )
-public interface ActivityComponent extends ActivityComponentInjects, ActivityComponentExposes {
+public interface ActivityComponent extends ActivityComponentInjects,
+                                           ActivityComponentExposes {
 }

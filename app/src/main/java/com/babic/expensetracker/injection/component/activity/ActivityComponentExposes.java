@@ -1,4 +1,6 @@
 package com.babic.expensetracker.injection.component.activity;
 
-public interface ActivityComponentExposes {
+import com.babic.expensetracker.injection.component.application.ApplicationComponentExposes;
+
+public interface ActivityComponentExposes extends ApplicationComponentExposes {
 }

@@ -24,9 +24,9 @@ public final class ComponentFactory {
                                          .build();
     }
 
-    public static ActivityComponent createActivityComponent(final AppCompatActivity appCompatActivity, final ApplicationComponent applicationComponent) {
+    public static ActivityComponent createActivityComponent(final AppCompatActivity appCompatActivity, final ExpenseTrackerApplication application) {
         return DaggerActivityComponent.builder()
-                                      .applicationComponent(applicationComponent)
+                                      .applicationComponent(application.getApplicationComponent())
                                       .activityModule(new ActivityModule(appCompatActivity))
                                       .build();
     }
