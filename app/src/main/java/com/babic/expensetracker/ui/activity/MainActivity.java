@@ -19,6 +19,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemLongClick;
 
 public final class MainActivity extends BaseActivity implements MainView {
 
@@ -75,6 +76,12 @@ public final class MainActivity extends BaseActivity implements MainView {
     @Override
     public int getAmount() {
         return Integer.parseInt(expenseAmount.getEditableText().toString());
+    }
+
+    @OnItemLongClick(R.id.activity_main_adapter)
+    protected boolean onItemLongClick(final int position) {
+        presenter.deleteExpense(adapter.getItem(position));
+        return true;
     }
 
     @OnClick(R.id.fab)

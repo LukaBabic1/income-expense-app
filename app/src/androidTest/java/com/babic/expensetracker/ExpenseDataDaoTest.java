@@ -38,9 +38,9 @@ public final class ExpenseDataDaoTest extends AndroidTestCase {
     public void testSavingSingleData() {
         final ExpenseData data = new ExpenseData("foo", "bar", 10, 10L);
 
-        expenseDao.saveExpense(data);
+        expenseDao.save(data);
 
-        final List<ExpenseData> allData = expenseDao.getAllExpenses();
+        final List<ExpenseData> allData = expenseDao.getAll();
 
         Assert.assertNotNull(allData);
         Assert.assertEquals(1, allData.size());
@@ -55,10 +55,10 @@ public final class ExpenseDataDaoTest extends AndroidTestCase {
         final ExpenseData data1 = new ExpenseData(50, "foo", "bar", 10, 10L);
         final ExpenseData data2 = new ExpenseData(100, "luka", "luka", 20, 20L);
 
-        expenseDao.saveExpense(data1);
-        expenseDao.saveExpense(data2);
+        expenseDao.save(data1);
+        expenseDao.save(data2);
 
-        final ExpenseData fromDao = expenseDao.getExpenseById(data2.id);
+        final ExpenseData fromDao = expenseDao.getById(data2.id);
 
         Assert.assertNotNull(fromDao);
         Assert.assertEquals(data2, fromDao);
@@ -69,13 +69,13 @@ public final class ExpenseDataDaoTest extends AndroidTestCase {
         final ExpenseData data1 = new ExpenseData(50, "foo", "bar", 10, 10L);
         final ExpenseData data2 = new ExpenseData(100, "luka", "luka", 20, 20L);
 
-        expenseDao.saveExpense(data1);
-        expenseDao.saveExpense(data2);
+        expenseDao.save(data1);
+        expenseDao.save(data2);
 
         final ExpenseData result = new ExpenseData(50, "fdsfs", "fdsf", 156, 789L);
-        expenseDao.updateExpense(result);
+        expenseDao.update(result);
 
-        final ExpenseData fromDao = expenseDao.getExpenseById(result.id);
+        final ExpenseData fromDao = expenseDao.getById(result.id);
 
         Assert.assertNotNull(fromDao);
         Assert.assertEquals(result, fromDao);

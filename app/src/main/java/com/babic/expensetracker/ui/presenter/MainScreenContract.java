@@ -17,6 +17,8 @@ public final class MainScreenContract {
         void addExpense();
 
         void listExpenses();
+
+        void deleteExpense(ExpenseData data);
     }
 
     public interface MainView {

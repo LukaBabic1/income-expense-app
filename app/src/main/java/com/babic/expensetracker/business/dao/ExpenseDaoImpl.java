@@ -19,7 +19,7 @@ public final class ExpenseDaoImpl extends BaseDao implements ExpenseDao {
     }
 
     @Override
-    public void saveExpense(final ExpenseData data) {
+    public void save(final ExpenseData data) {
         writeToDatabase(databaseHelper, new ManagedAction() {
             @Override
             public void call(final SQLiteDatabase database) {
@@ -29,7 +29,7 @@ public final class ExpenseDaoImpl extends BaseDao implements ExpenseDao {
     }
 
     @Override
-    public void updateExpense(final ExpenseData data) {
+    public void update(final ExpenseData data) {
         writeToDatabase(databaseHelper, new ManagedAction() {
             @Override
             public void call(SQLiteDatabase sqLiteDatabase) {
@@ -37,6 +37,18 @@ public final class ExpenseDaoImpl extends BaseDao implements ExpenseDao {
                                       expenseDataToContentValues(data),
                                       ExpenseDataTable._ID + " = ?",
                                       new String[]{String.valueOf(data.id)});
+            }
+        });
+    }
+
+    @Override
+    public void delete(final int id) {
+        writeToDatabase(databaseHelper, new ManagedAction() {
+            @Override
+            public void call(final SQLiteDatabase sqLiteDatabase) {
+                sqLiteDatabase.delete(ExpenseDataTable.TABLE_NAME,
+                                      ExpenseDataTable._ID + "= ?",
+                                      new String[]{String.valueOf(id)});
             }
         });
     }
@@ -56,7 +68,7 @@ public final class ExpenseDaoImpl extends BaseDao implements ExpenseDao {
     }
 
     @Override
-    public ExpenseData getExpenseById(final int id) {
+    public ExpenseData getById(final int id) {
         return readFromDatabase(databaseHelper, new ManagedFunction<ExpenseData>() {
             @Override
             public ExpenseData call(final SQLiteDatabase database) {
@@ -98,7 +110,7 @@ public final class ExpenseDaoImpl extends BaseDao implements ExpenseDao {
     }
 
     @Override
-    public List<ExpenseData> getAllExpenses() {
+    public List<ExpenseData> getAll() {
         return readFromDatabase(databaseHelper, new ManagedFunction<List<ExpenseData>>() {
             @Override
             public List<ExpenseData> call(final SQLiteDatabase database) {

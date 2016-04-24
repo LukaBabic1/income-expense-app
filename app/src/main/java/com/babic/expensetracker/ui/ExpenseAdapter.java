@@ -10,12 +10,15 @@ import android.widget.TextView;
 import com.babic.expensetracker.R;
 import com.babic.expensetracker.business.data.ExpenseData;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public final class ExpenseAdapter extends ArrayAdapter<ExpenseData> {
+
+    private final DateFormat dateFormat = DateFormat.getDateInstance();
 
     private final LayoutInflater inflater;
 
@@ -41,7 +44,7 @@ public final class ExpenseAdapter extends ArrayAdapter<ExpenseData> {
     private void populate(final ViewHolder viewHolder, final ExpenseData expenseData) {
         viewHolder.expenseName.setText(expenseData.name);
         viewHolder.expenseAmount.setText(String.valueOf(expenseData.amount));
-        viewHolder.expenseTime.setText(String.valueOf(expenseData.timestamp));
+        viewHolder.expenseTime.setText(dateFormat.format(expenseData.timestamp));
     }
 
     protected static final class ViewHolder {

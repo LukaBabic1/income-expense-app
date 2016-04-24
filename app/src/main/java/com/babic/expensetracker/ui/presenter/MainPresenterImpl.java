@@ -27,8 +27,14 @@ public final class MainPresenterImpl implements MainScreenContract.MainPresenter
         if (view != null) {
             final String name = view.getName();
             final int amount = view.getAmount();
-            expenseDao.saveExpense(new ExpenseData(name, name, amount, System.currentTimeMillis()));
+            expenseDao.save(new ExpenseData(name, name, amount, System.currentTimeMillis()));
         }
+        listExpenses();
+    }
+
+    @Override
+    public void deleteExpense(final ExpenseData data) {
+        expenseDao.delete(data.id);
         listExpenses();
     }
 
@@ -36,7 +42,7 @@ public final class MainPresenterImpl implements MainScreenContract.MainPresenter
     public void listExpenses() {
         final MainView view = getView();
         if (view != null) {
-            view.setData(expenseDao.getAllExpenses());
+            view.setData(expenseDao.getAll());
         }
     }
 

@@ -6,13 +6,15 @@ import java.util.List;
 
 public interface ExpenseDao {
 
-    void saveExpense(ExpenseData data);
+    void save(ExpenseData data);
 
-    void updateExpense(ExpenseData data);
+    void update(ExpenseData data);
 
-    ExpenseData getExpenseById(int id);
+    void delete(int id);
 
-    List<ExpenseData> getAllExpenses();
+    ExpenseData getById(int id);
+
+    List<ExpenseData> getAll();
 
     List<ExpenseData> getExpenseFromInterval(long start, long end);
 
